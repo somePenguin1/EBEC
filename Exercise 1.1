@@ -1,0 +1,16 @@
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+
+from math import * #importing all the math functions
+
+#used for input from user
+vineSpace=float(input('How much space should be between the vines? '))
+postSpace=float(input('How wide is the post-end assembly? '))
+rowLength=float(input('How long is the row? '))
+
+
+numGrapevines= (rowLength -(2*postSpace)) # calculating first part of the equation
+numGrapevines=numGrapevines/vineSpace # calculating the second part of the equation
+numGrapevines=floor(numGrapevines) # used to round the number calculated
+
+print('This row has enough space for ' + str(numGrapevines) + ' vines') # Result being printed out
