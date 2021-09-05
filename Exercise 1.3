@@ -1,0 +1,54 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Cookie Recipe
+Date: 9/4/2021
+
+Description:
+    Program to find the quantity of ingredients needed to make
+    quantity of cookies user hopes to make.  
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+from math import * #used to import all math functions
+
+def main():
+
+
+    askCookie=int(input('How many cookies do you want to make? ')) # find how many cookies user wants to make
+
+    baseCups=float(askCookie/48) # find the base number of cups
+    sugarCups=baseCups*1.75 # find number of sugar cups
+    sugarCups=round(sugarCups,2)
+
+    butterCups=baseCups*1 # find number of butter cups
+    butterCups=round(butterCups,2)
+
+    flourCups=baseCups*2.5 #find number of flour cups
+    flourCups=round(flourCups,2)
+
+    #print the final results
+    print('To make ' + str(askCookie) + ' cookies, you will need:')
+    print(str(sugarCups) + ' cups of sugar')
+    print(str(butterCups) + ' cups of butter')
+    print(str(flourCups) + ' cups of flour')
+
+
+main() # calling function
