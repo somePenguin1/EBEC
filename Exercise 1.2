@@ -1,0 +1,55 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Assignment Name
+Date: 9/4/2021
+
+Description:
+    Program to the future value of an account based off of the principal, 
+    interest rate, number of times compounded, and length of time the account 
+    will be open for. 
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+from math import * #used to import all math functions
+
+def main():
+
+
+    # get all input from users
+    print('Please enter the following quantities')
+    principal=float(input('How much is the initial deposit? '))
+    anInRate= float(input('What is the annual interest rate in percent? '))
+    anInRate=anInRate/100 # to make sure rate is in hundredths
+    numTimesInComp=float(input('How many times per year is the interest compounded? '))
+    numYears=float(input('How many years will the account earn interest? '))
+
+    interestRate=float((1.0 + (anInRate/numTimesInComp))) #Finding interest rate for each time compounded
+
+    inAmount=interestRate**(numYears*numTimesInComp)
+
+    futureValue= principal*inAmount #equation to find out how much the account is worth
+    futureValue=round(futureValue, 2) # round Source: https://www.w3schools.com/python/ref_func_round.asp
+
+    print(' At the end of ' + str(numYears) + ' years, this account will be worth $' + str(futureValue) +'.') #printing how much the account is worth
+    
+
+
+main() # calling function
