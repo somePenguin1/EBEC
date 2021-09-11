@@ -1,10 +1,10 @@
 """
 Author: Aadi Jain, jain448@purdue.edu
-Assignment: m.n - Assignment Name
+Assignment: m.n - Vineyard
 Date: 9/4/2021
 
 Description:
-    Program to find how much rows of vineyards are possible with the space available. 
+    Program to find how much rows of vineyards are possible with the space available.
 
 Contributors:
     Name, login@purdue.edu [repeat for each]
@@ -26,22 +26,19 @@ Academic Integrity Statement:
     submitting is my own original work.
 """
 
-from math import * #used to import all math functions
 
 def main():
-
+    print('Enter each of the following quantities in meters.')
     #used for input from user
-    vineSpace=float(input('How much space should be between the vines? '))
-    postSpace=float(input('How wide is the post-end assembly? '))
-    rowLength=float(input('How long is the row? '))
-
+    vineSpace=float(input('  How much space should be between the vines? '))
+    postSpace=float(input('  How wide is the end-post assembly? '))
+    rowLength=float(input('  How long is this row? '))
 
     numGrapevines= (rowLength -(2*postSpace)) # calculating first part of the equation
     numGrapevines=numGrapevines/vineSpace # calculating the second part of the equation
-    numGrapevines=floor(numGrapevines) # used to round the number calculated
+    numGrapevines=int(numGrapevines) # used to round the number calculated
+    print('')
+    print('This row has enough space for ' + str(numGrapevines) + ' vine(s).') # Result being printed out
 
-    print('This row has enough space for ' + str(numGrapevines) + ' vines') # Result being printed out
-
-
-
-main() # used to call function
+if __name__== '__main__':
+    main()
