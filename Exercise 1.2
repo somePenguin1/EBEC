@@ -4,9 +4,9 @@ Assignment: m.n - Interest
 Date: 9/4/2021
 
 Description:
-    Program to the future value of an account based off of the principal, 
-    interest rate, number of times compounded, and length of time the account 
-    will be open for. 
+    Program to the future value of an account based off of the principal,
+    interest rate, number of times compounded, and length of time the account
+    will be open for.
 
 Contributors:
     Name, login@purdue.edu [repeat for each]
@@ -28,28 +28,25 @@ Academic Integrity Statement:
     submitting is my own original work.
 """
 
-from math import * #used to import all math functions
+def main(): #function that is called
 
-def main():
+    # gets input from users
+    print('Please enter the following quantities.')
+    principal=float(input('  How much is the initial deposit? '))
+    anInRate= float(input('  What is the annual interest rate in percent? '))
+    numTimesInComp=float(input('  How many times per year is the interest compounded? '))
+    numYears=float(input('  How many years will the account earn interest? '))
 
+    interestRate=float((1.0 + ((anInRate/numTimesInComp)/100))) #finds interest rate
 
-    # get all input from users
-    print('Please enter the following quantities')
-    principal=float(input('How much is the initial deposit? '))
-    anInRate= float(input('What is the annual interest rate in percent? '))
-    anInRate=anInRate/100 # to make sure rate is in hundredths
-    numTimesInComp=float(input('How many times per year is the interest compounded? '))
-    numYears=float(input('How many years will the account earn interest? '))
-
-    interestRate=float((1.0 + (anInRate/numTimesInComp))) #Finding interest rate for each time compounded
-
-    inAmount=interestRate**(numYears*numTimesInComp)
-
-    futureValue= principal*inAmount #equation to find out how much the account is worth
-    futureValue=round(futureValue, 2) # round Source: https://www.w3schools.com/python/ref_func_round.asp
-
-    print(' At the end of ' + str(numYears) + ' years, this account will be worth $' + str(futureValue) +'.') #printing how much the account is worth
-    
+    exp=numYears*numTimesInComp
+    futureValue=interestRate**(exp) #find amount in interest
+    futureValue= principal*futureValue #how much the account is worth
+    futureValue=round(futureValue, 2) # round source: https://www.w3schools.com/python/ref_func_round.asp
+    print('')
+    futureValue = "{:,}".format(futureValue) #commas source: https://www.kite.com/python/answers/how-to-add-commas-to-a-number-in-python
+    print('At the end of ' + str(numYears) + ' years, this account will be worth $' + str(futureValue) +'.') #printing how much the account is worth
 
 
-main() # calling function
+if __name__== '__main__':
+    main()
