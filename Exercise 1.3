@@ -5,7 +5,7 @@ Date: 9/4/2021
 
 Description:
     Program to find the quantity of ingredients needed to make
-    quantity of cookies user hopes to make.  
+    quantity of cookies user hopes to make.
 
 Contributors:
     Name, login@purdue.edu [repeat for each]
@@ -27,8 +27,6 @@ Academic Integrity Statement:
     submitting is my own original work.
 """
 
-from math import * #used to import all math functions
-
 def main():
 
 
@@ -46,9 +44,10 @@ def main():
 
     #print the final results
     print('To make ' + str(askCookie) + ' cookies, you will need:')
-    print(str(sugarCups) + ' cups of sugar')
-    print(str(butterCups) + ' cups of butter')
-    print(str(flourCups) + ' cups of flour')
+    print('   ' + str(sugarCups) + ' cups of sugar')
+    print('   ' +  str(butterCups) + ' cups of butter')
+    print('  ' +  str(flourCups) + ' cups of flour')
 
 
-main() # calling function
+if __name__ == '__main__':
+    main() # calling function
