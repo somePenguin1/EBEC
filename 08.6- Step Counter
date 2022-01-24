@@ -1,0 +1,59 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Step Counter
+Date: 11/09/2021
+
+Description:
+    A program that counts the average number of steps taken each month from a file with all the steps daily from a year
+    and prints the output for each month of the year.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+
+def main():
+    print('The average steps taken each month were:')
+    x=[]  #list to collect step count
+    with open('steps.txt') as fo:
+        x=fo.readlines() #read all step counts
+        for a in range(0, len(x)):
+            x[a]=int(float(x[a].replace('\n', ''))) #remove new lines
+
+    #arrays for months and days
+    months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    days=[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    monthSteps=0
+    counter=0
+    max=0
+    for step in x:  #for each step
+        counter += 1
+        monthSteps+=step  #add steps to monthly count
+        if (days[max]==counter):  #find and print average for each month
+            average=(monthSteps/(days[max]))
+            print(' ' * (10-len(months[max])), end='')
+            print(str(months[max]) + ' : ' + str(format(average, '.2f')))
+            max+=1
+            counter=0
+            monthSteps=0
+
+if __name__ == '__main__': #call main function
+    main()
+
