@@ -1,0 +1,48 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Organisms
+Date: 9/27/2021
+
+Description:
+    Program that predicts the approximate size of a population of organisms.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main(): #main function
+
+    #collect input from user
+    pop=float(input('Starting number, in million: '))
+    inc=int(input('Average daily increase, in percent: '))
+    days=int(input('Number of days to multiply: '))
+
+    rate=(inc/100)
+    rate+=1
+    print('Day' + '   ' + 'Approx. Pop')
+    print('  ' + str('0') + '       ' + str(pop) + '000')
+
+    for a in range(1,days+1):  #main loop statement
+        pop*=rate
+        print('  ' + str(a) + '       ', end='')
+        print(format(pop, ".4f"))
+
+
+if __name__ == '__main__': # calling main function
+    main()
