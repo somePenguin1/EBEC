@@ -1,0 +1,62 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Sin Cos
+Date: 11/26/2021
+
+Description:
+    A program that draws the sine and cosine saves from 0 to 2pi with ticks and markers. The waves are colored to easily
+    distinguish between both.
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+import matplotlib.pyplot as plt
+import math
+
+def main():
+
+    fig, ax= plt.subplots() #create figure
+    ysin=[] #create lists
+    ycos=[]
+    x=[]
+    count=0
+    while (count<6.29): #add y values for both to lists
+        ysin.append((math.sin(count)))
+        ycos.append((math.cos(count)))
+        x.append(count)
+        count+=0.01 #increment
+
+    #change spines for graph
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    for spine in ['bottom', 'left']:
+        ax.spines[spine].set_position('zero')
+
+    ax.set_xticks([math.pi/2, math.pi, 3/2*math.pi, 2*math.pi])
+    ax.set_xticklabels(['$\\pi/2$', '$\\pi$', '$3\\pi/2$', '$2\\pi$']) #set tick labels
+    ax.set_ylim([-1.1,1.1])
+    ax.set_yticks([-1,1])
+    ax.plot(x,ysin, color='r')  #plot both graphs
+    ax.plot(x,ycos, color='b')
+    plt.show() #show figure
+
+if __name__ == '__main__': #call main function
+    main()
+
