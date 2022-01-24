@@ -1,0 +1,67 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Covid 19 Cases
+Date: 11/25/2021
+
+Description:
+    A program that draws the number of COVID-19 cases cumulatively in the state of Indiana from March 2020 until November 2021.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+import matplotlib.pyplot as plt
+import datetime
+
+def main():
+    dates=[]
+    cases=[]
+    with open('indiana_covid_19_data_fall_2021.txt') as fo: #open file
+        num = 0
+        for daily in fo.readlines():  #add dates to list
+            day=(daily.strip())
+            day=day.split()
+            num+=(float(day[2])/1000)
+            dates.append(day[0])
+            cases.append(num)
+    x=[]
+    #do date work
+    for date in dates:
+        y,m,d = date.split('-')
+        dt=datetime.date(int(y), int(m), int(d))
+        x.append(dt)
+    print(x)
+
+    fig, ax= plt.subplots() #create figure
+    ax.set_title('Positive COVID-19 Cases in Indiana') #set title
+    ax.set_xlabel('Date') #create labels
+    ax.set_ylabel('Number of Cases (in thousands)')
+
+    #set labels
+    ax.set_xticklabels(['2020-03', '2020-05', '2020-07', '2020-09', '2020-11', '2021-01', '2021-03', '2021-05', '2021-07', '2021-09', '2021-11']) #set ticks
+    ax.set_yticklabels(['0', '200', '400', '600', '800', '1000', '1200'])
+
+    #set limits
+    ax.set_ylim(0,1100) #set y limit
+    ax.plot(x,cases) #plot graph
+    ax.bar(x,cases, width=1)
+    fig.autofmt_xdate()
+    plt.show() #plot figure
+if __name__ == '__main__': #call main function
+    main()
+
