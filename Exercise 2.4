@@ -1,0 +1,94 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Time Calculator
+Date: 9/18/2021
+
+Description:
+    Program to find days, hours, minutes, and seconds from a user input of any number of seconds.
+
+Contributors:
+    Deepak Jain, deepakjain@yahoo.com
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main(): #main function
+
+    timeInSec=int(input('Please enter a time in seconds: ')) #gets input from user
+
+    time = timeInSec
+    if (time < 60):
+        print('  %d seconds is less than one minute.' %time)
+    else:
+        # Get no of days
+        days = time // (24 * 60 * 60)
+        # Get remainder time after days
+        time = time % (24 * 60 * 60)
+        # Get no of hours
+        hours = time // (60 * 60)
+        time = time % (60 * 60)
+        #Get no of minutes
+        minutes = time // (60)
+        time = time % (60)
+
+        seconds = time
+
+        result = ""
+
+        #print("{} day(s) {} hour(s) {} minute(s) {} second(s)".format(days, hours, minutes, seconds))
+
+        count = 0
+        if (seconds > 0):
+            result = str(seconds) + " second(s)";
+            count = count + 1
+
+        if (minutes > 0):
+            if (count == 1):
+                result1 = str(minutes) + " minute(s) and " + result
+                result = result1
+                count = count + 1
+            else:
+                result = str(minutes) + " minute(s)"
+                count = count + 1
+
+        if (hours > 0):
+             if (count == 1):
+                result1 = str(hours) + " hour(s) and " + result
+                result = result1
+                count = count + 1
+             elif (count == 2):
+                result1 = str(hours) + " hour(s), " + result
+                result = result1
+                count = count + 1
+             else:
+                result = str(hours) + " hour(s)"
+                count = count + 1
+
+        if (days > 0):
+             if (count == 1):
+                result1 = str(days) + " day(s) and " + result
+                result = result1
+             elif (count > 1):
+                result1 = str(days) + " day(s), " + result
+                result = result1
+             else:
+                result = str(days) + " day(s)"
+
+        print("  {:,} seconds is: {}.".format(timeInSec, result))
+
+
+if __name__ == '__main__': # calling main function
+    main()
