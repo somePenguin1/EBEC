@@ -1,0 +1,57 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Prime Numbers
+Date: 10/02/2021
+
+Description:
+    Program that tells whether a number inputted is a prime number.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main(): #main function
+
+    primeIn=int(input('Enter a positive integer (-1 to quit): '))  #get user input
+
+    while(primeIn!=-1):  #check for -1 to quit
+        if (primeIn==-1):
+            break
+        status= is_prime(primeIn)
+        #prints if numbers is prime
+        if status:
+            print('  ' + str(primeIn) + ' is prime!')
+        else:
+            print('  ' + str(primeIn) + ' is not prime.')
+        primeIn=int(input('Enter a positive integer (-1 to quit): '))
+
+def is_prime(primeIn): # function checks if number is prime
+    primeNumList=[]
+
+    for a in range(1, primeIn+1):  #loop to go through all
+        if (primeIn % a ==0):
+            primeNumList.append(a) #adds prime numbers to list
+
+    if ((len(primeNumList) ==2) and (primeNumList[0]==1 and primeNumList[1]==primeIn)): #finds if num is prime
+        return True
+    else:
+        return False
+
+if __name__ == '__main__': # calling main function
+    main()
