@@ -1,0 +1,50 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Falling
+Date: 9/30/2021
+
+Description:
+    Program that calculates distance an object falls in a given amount of seconds.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main(): #main function
+
+    print('Time (s)' + '  ' + 'Distance (m)')  # first output line
+    print('----------------------')
+
+    startNum=5
+    endNum=55
+
+    for time in range(startNum, endNum, 5): #main for loop
+        x=falling_dist(time)
+        a="{:14.1f}".format(x)
+        if (time ==5):
+            print(' ', end='')
+        print('      ' + str(time) + a) #print first part of function
+
+def falling_dist(time):
+    distance= 8.87*(time**2)
+    distance*=0.5
+    return distance
+
+if __name__ == '__main__': # calling main function
+    main()
