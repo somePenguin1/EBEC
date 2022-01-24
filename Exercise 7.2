@@ -1,0 +1,56 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Number Analysis
+Date: 11/01/2021
+
+Description:
+    A program in which a user inputs 10 floating point numbers, which go into a list, and then the minimum, maximum, sum,
+    and average are printed.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+def main():
+    some = []  # list for calculations
+    print('Enter 10 numbers:')
+    some = get_number_list()  # get the list of inputs
+    # calculate the statistics
+    minNum = min(some)
+    maxNum = max(some)
+    total = sum(some)
+    average = total / len(some)
+
+    # print statistics of numbers
+    print('Highest number: ' + str(format(maxNum, '.2f')))
+    print('Lowest number: ' + str(format(minNum, '.2f')))
+    print('Total: ' + str(format(total, '.2f')))
+    print('Average: ' + str(format(average, '.2f')))
+
+def get_number_list():  # get user inputs
+    l=[]
+    for i in range(1, 11):
+        if i != 10:
+            num = float(input('  number  ' + str(i) + ' of 10: '))  # get 10 different numbers
+        else:
+            num = float(input('  number ' + str(i) + ' of 10: '))
+        l.append(num)
+    return l  # return list of numbers
+
+if __name__ == '__main__':
+    main()
