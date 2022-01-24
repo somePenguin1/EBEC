@@ -1,0 +1,358 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Solo Wof
+Date: 12/06/2021
+
+Description:
+    A program that simulates wheel of fortune as a game for the user to play.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+import random as r
+
+#initialize important variables
+unUsedVowels = 'AEIOU'
+unUsedConsants = 'BCDFGHJKLMNPQRSTVWXYZ'
+usedVowels = ''
+usedConsonants = ''
+allVowels = 'AEIOU'
+allConsonants = 'BCDFGHJKLMNPQRSTVWXYZ'
+
+totalEarnings = 0
+roundCount = 1
+roundEarnings = 0
+gamePhrase = ''
+allPhrases = []
+underscoredPhrase = ''
+letters=[]
+
+def main(): #create phrase from main function
+    global allPhrases
+    allPhrases = load_phrases()
+    global gamePhrase
+    gamePhrase = allPhrases[roundCount - 1]
+    print('Welcome to Solo Wheel of Fortune!')
+    banner()
+    return
+
+
+def banner(): #print banner
+    global unUsedConsants
+    global unUsedVowels
+    global underscoredPhrase
+    global gamePhrase
+    if roundCount>4:
+        exit_program()
+    gamePhrase = allPhrases[roundCount - 1]
+
+    underscoredPhrase = load_hidden_word(gamePhrase)
+    #load the banner that appears every time
+    print(f'\n:: Solo WoF :::::::::::::::::::::::::::::: Round {roundCount} of 4 ::')
+    # print("\n:: Solo WoF :::::::::::::::::::::::::::::: Round 1 of 4 ::")
+    print(f'::{underscoredPhrase.center(54, " ")}::')  # fix this and make it better
+    print('::::::::::::::::::::::::::::::::::::::::::::::::::::::::::')
+    print(f'::   {unUsedVowels}   ::   {unUsedConsants}   :: {("$" + format(roundEarnings, ",")).rjust(10, " ")} ::')
+    print('::::::::::::::::::::::::::::::::::::::::::::::::::::::::::')
+    print('')
+    pick_options() #go to main menu
+    return
+
+
+def pick_options():
+    print('Menu:')
+    print('  1 - Spin the wheel.')
+    print('  2 - Buy a vowel.')
+    print('  3 - Solve the puzzle.')
+    print('  4 - Quit the game.')
+    print('')
+    global roundCount
+    global roundEarnings
+    global totalEarnings
+    global unUsedConsants
+    global unUsedVowels
+    global usedVowels
+    global usedConsonants
+    global gamePhrase
+    global letters
+    global underscoredPhrase
+    global underscoredPhrase
+
+    userMenu = input('Enter the number of your choice: ') #get input for menu
+
+    if userMenu == '1': #if pick consonant
+        if len(unUsedConsants.strip()) != 0:
+            some = spin_the_wheel()
+            if some == 'BANKRUPT':
+                print('The wheel landed on BANKRUPT.')
+                print(f"You lost ${format(roundEarnings, ',')}!")
+                roundEarnings = 0
+                banner()
+            else:
+                print(f'The wheel landed on ${format(some, ",")}.')
+                number = 0
+                userMenu=pick_consonants(some, gamePhrase, number)
+                if userMenu == '4':
+                    exit_program()
+                else:
+                    banner()
+        else:
+            print('There are no more consonants to choose.')
+            banner()
+            return
+    elif userMenu == '2': #if buy vowel
+        if roundEarnings >= 275 and len(unUsedVowels.strip()) != 0:
+            buy_vowel(gamePhrase)
+        elif roundEarnings < 275:
+            print('You need at least $275 to buy a vowel.')
+            banner()
+        else:
+            print('There are no more vowels to buy.')
+            banner()
+        return #1
+    elif userMenu == '3': #if solve puzzle
+        print('Enter your solution.')
+        print(f'  Clues: {load_hidden_word(gamePhrase)}')
+        wordGuess = input('  Guess: ')
+        if wordGuess.upper() == gamePhrase.upper():
+            print('Ladies and gentlemen, we have a winner!')
+            print('')
+            if roundEarnings<1000:
+                roundEarnings=1000
+            totalEarnings += roundEarnings
+            print(f'You earned ${format(roundEarnings,",")} this round.')
+        else:
+            print("I'm sorry. The correct solution was:")
+            print(gamePhrase.upper())
+            print('')
+            print('You earned $0 this round.')
+        #if roundCount==4:
+            #print('')
+            #print('Thanks for playing!')
+            #print(f'You earned a total of ${format(totalEarnings, ",")}.')
+            #exit_program()
+        #else:
+        if roundCount==4:
+            exit_program(endGame=True)
+        else:
+            new_round()
+        return
+    elif userMenu == '4': #if quit game
+        exit_program()
+        return
+    else: #for invalid input
+        print(f'"{userMenu}" is an invalid choice.')
+        print()
+        pick_options()
+    return
+
+def exit_program(endGame=False): #for quitting the game
+    global roundCount #global
+    global roundEarnings
+    global totalEarnings
+    global unUsedConsants
+    global unUsedVowels
+    global usedVowels
+    global usedConsonants
+    global gamePhrase
+    global letters
+    global underscoredPhrase
+
+    if (endGame == False):
+        roundEarnings=0 #print values
+        print('')
+        print(f'You earned ${format(roundEarnings,",")} this round.')
+    print('')
+    print('Thanks for playing!')
+    print(f'You earned a total of ${format(totalEarnings, ",")}.')
+    #clear values
+    unUsedConsants = 'BCDFGHJKLMNPQRSTVWXYZ'
+    unUsedVowels = 'AEIOU'
+    usedVowels = ''
+    usedConsonants = ''
+    underscoredPhrase = ''
+    letters.clear()
+    roundCount=1
+    totalEarnings=0
+    roundEarnings=0
+    return
+
+def new_round():  #create new round
+    global roundCount #make global variables
+    global roundEarnings
+    global unUsedConsants
+    global unUsedVowels
+    global usedVowels
+    global usedConsonants
+    global gamePhrase
+    global letters
+    global underscoredPhrase
+    global underscoredPhrase
+    global endGame
+
+    endGame=False
+
+    roundEarnings=0  #clear all values
+    roundCount+=1
+    unUsedVowels='AEIOU'
+    unUsedConsants = 'BCDFGHJKLMNPQRSTVWXYZ'
+    gamePhrase = allPhrases[roundCount - 1]
+    underscoredPhrase=''
+    letters.clear()
+    underscoredPhrase = load_hidden_word(gamePhrase)
+    banner()
+    return
+
+def pick_consonants(roundValue, phrase, numTimes): #pick consonants
+    global roundEarnings #global
+    global totalEarnings
+    global roundCount
+    global unUsedConsants
+    global usedConsonants
+    global underscoredPhrase
+    global letters
+
+    if len(unUsedConsants.strip())==0: #check for consonants
+        return
+    else: #get input
+        userConsonant = input('Pick a consonant: ')
+        userConsonant = userConsonant.upper()
+
+    if (userConsonant.isdigit()):
+        return userConsonant
+    elif len(userConsonant) != 1:
+        print('Please enter exactly one character.')
+        pick_consonants(roundValue, phrase, numTimes)
+        return userConsonant
+    elif userConsonant in unUsedConsants:  # if consonant is not in list of unused consonants
+        usedConsonants = usedConsonants.join(userConsonant)
+        unUsedConsants = unUsedConsants.replace(userConsonant, ' ')
+        times = phrase.upper().count(userConsonant)
+        roundWin = roundValue * times  # find winnings for picking consonant
+        if times == 0:
+            print(f"I'm sorry, there are no {userConsonant}'s.")
+            if len(unUsedConsants.strip())==0:
+                return userConsonant
+        elif times == 1:  # print
+            print(f'There is 1 {userConsonant}, which earns you ${format(roundWin, ",")}.')
+            roundEarnings += roundWin
+            letters.extend(userConsonant)
+        else:
+            print(f"There are {times} {userConsonant}'s, which earns you ${format(roundWin, ',')}.")
+            roundEarnings += roundWin
+            letters.extend(userConsonant) #add letter
+    elif userConsonant in usedConsonants:
+        print(f"The letter {userConsonant} has already been used.")
+        pick_consonants(roundValue, phrase, numTimes)
+        return
+    elif userConsonant in allVowels:
+        print('Vowels must be purchased.')
+        pick_consonants(roundValue, phrase, numTimes)
+        return
+    else:
+        print(f'The character {userConsonant} is not a letter.')
+        pick_consonants(roundValue, phrase, numTimes)
+        return
+    #banner()
+    return
+
+
+def spin_the_wheel(): #spin wheel to find round value
+    possibleSpins = [500, 500, 500, 500, 550, 550, 600, 600, 600, 600, 650, 650, 650, 700, 700, 800, 800, 900, 2500,
+                     'BANKRUPT', 'BANKRUPT']
+    return possibleSpins[r.randint(0, 20)]
+
+def buy_vowel(phrase): #buy vowel function
+    global roundEarnings
+    global totalEarnings
+    global roundCount
+    global unUsedVowels
+    global usedVowels
+    global underscoredPhrase
+    global letters
+
+    if len(unUsedVowels.strip()) == 0:
+        return
+    else:
+        userVowel = input('Pick a vowel: ') #get vowel input
+        userVowel= userVowel.upper()
+
+    #check user input
+    if (userVowel.isdigit()):
+        return userVowel
+    elif len(userVowel) != 1: #if input not 1
+        print('Please enter exactly one character.')
+        buy_vowel(phrase)
+        return userVowel
+    elif userVowel in unUsedVowels:  # if consonant is not in list of unused consonants
+        usedVowels = usedVowels.join(userVowel)
+        unUsedVowels = unUsedVowels.replace(userVowel, ' ')
+        times = phrase.upper().count(userVowel)
+        if times == 0:
+            print(f"I'm sorry, there are no {userVowel}'s.")
+            roundEarnings-=275
+            if len(unUsedVowels.strip()) == 0:
+                return userVowel
+        elif times == 1:  # print
+            print(f'There is 1 {userVowel}.')
+            letters.extend(userVowel)
+            roundEarnings-=275
+        else:
+            print(f"There are {times} {userVowel}'s.")
+            letters.extend(userVowel)
+            roundEarnings-=275
+    elif userVowel in usedVowels:
+        print(f"The letter {userVowel} has already been purchased.")
+        buy_vowel(phrase)
+        return
+    elif userVowel in allConsonants:
+        print('Consonants cannot be purchased.')
+        buy_vowel(phrase)
+        return
+    else:
+        print(f'The character {userVowel} is not a letter.')
+        buy_vowel(phrase)
+        return
+    banner()
+    return
+
+
+def load_phrases():
+    words = []
+    with open('phrases.txt', 'r') as fo:  # open file
+        for word in fo.readlines():
+            words.append((word.strip()))  # add gas prices to list
+    r.shuffle(words)
+    return words
+
+
+def load_hidden_word(phrase):  # load hidden words
+    global letters
+    hidWord = ''
+    for letter in phrase:  # add _ or space for each word
+        if letter.upper() in letters:
+            hidWord+=letter.upper()
+        elif letter.isalpha():
+            hidWord += '_'
+        else:
+            hidWord += letter
+    return hidWord  # return hidden phrases
+
+if __name__ == '__main__':
+    main()
