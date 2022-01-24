@@ -1,0 +1,62 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Phone Number Converter
+Date: MM/DD/YYYY
+
+Description:
+    A program that converts a phone number entered by the user with characters in them into an actual phone number with
+    the digits that is actually usable.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+
+def main():
+    phoneNumber = input('Enter a telephone number: ')  # get user input
+    output = convert_number(phoneNumber)  # get output
+    print(f'The phone number is {output}')  # print output
+
+
+def convert_number(number):
+    number = number.lower()
+    endNumber = ''
+    part = number.split('-')  # divide number into parts
+    characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    num = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9]
+    for x in part:  # for every part of number
+        if x.isdigit():  # check for all numbers
+            endNumber += str(x)
+        else:
+            for a in range(0, len(x)):
+                some=x[a]
+                if some.isdigit():
+                    endNumber+=str(some)
+                for b in range(0, len(characters)):
+                    if x[a] == 'w' or x[a] == 'z':
+                        endNumber += str('9')
+                        break
+                    elif x[a] == characters[b]:  # find the character
+                        endNumber += str(num[b])
+        endNumber += '-'
+    return endNumber[0:len(endNumber)-1]  # return string w/o last dash
+
+
+if __name__ == '__main__':  # call main function
+    main()
