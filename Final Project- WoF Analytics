@@ -1,0 +1,56 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - WoF Analysis
+Date: 12/20/2021
+
+Description:
+    A program that analyzes the letters for each word used in the Solo WoF project and finds the letter frequency for all
+    26 letters and plots them on a graph.
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+import matplotlib.pyplot as plt
+
+def main():
+    #create lists for program
+    x=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    y=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    total=0
+    with open('phrases.txt') as fo: #open file
+        for word in fo.readlines():
+            for letter in word:
+                for a in range(0, len(x)): #match letters
+                    if letter.upper()==x[a]:
+                        y[a]=y[a]+1
+                        total+=1
+
+    for a in range(0, len(y)): #find percentages for each letter
+        y[a]=y[a]/total
+
+    fig, ax= plt.subplots() #create figure
+    ax.set_title('Letter Frequency in Puzzle Phrases') #set title
+    ax.set_xlabel('Letter') #create labels
+    ax.set_ylabel('Letter Appearance Frequency')
+    ax.grid()
+    ax.bar(x,y) #plot graph
+    plt.show() #plot figure
+if __name__ == '__main__': #call main function
+    main()
+
