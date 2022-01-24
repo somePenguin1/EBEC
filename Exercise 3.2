@@ -1,0 +1,55 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Sum Average
+Date: 9/27/2021
+
+Description:
+    Program to find the sum average from input entered by the user.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main(): #main function
+
+    num=float(input("Enter a non-negative number (negative to quit): ")) #used for first num
+
+    total=0  #set values
+    total+=num
+    count=1
+    if (num < 0):   #see if input is invalid
+        print("  You didn't enter any numbers.")
+    else:   #main loop
+        while (num >=0):
+            num=float(input("Enter a non-negative number (negative to quit): "))
+            if (num>=0):
+                total+=num
+                count+=1
+            else:
+                break
+
+        #print the statements now
+        print('  You entered ' + str(count) + ' numbers.')
+        average=total/count
+        average=round(average,3)
+        total=format(total, ".3f")
+        print('  Their sum is ' + str(total) +  ' and their average is ' + str(average) + '.')
+
+if __name__ == '__main__': # calling main function
+    main()
