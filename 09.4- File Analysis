@@ -1,0 +1,97 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - File Analysis
+Date: 11/22/2021
+
+Description:
+    A program that analyzes a file, finds unique words, the number of times they occur, words in both files, and words in either
+    file, but not in both.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main():
+
+    #calling all functions
+    x1=get_words('xian_1.txt')
+    wordsx1=get_unique_words(x1)
+
+
+    x2=get_words('xian_2.txt')
+    wordsx2=get_unique_words(x2)
+
+    
+    write_f2_file("xian_1_word_frequency", wordsx1)
+    write_f2_file("xian_2_word_frequency", wordsx2)
+
+    x2=set(x2)
+    x1=set(x1)
+
+    with open('common_words.txt', 'w') as fo:
+        sorted(x1.intersection(x2))
+        for thing in x1:
+            fo.write(thing + '\n')
+
+    with open('eitherbutnotboth.txt', 'w') as fo:
+        sorted(x1.symmetric_difference(x2))
+        for thing in x1:
+            fo.write(thing + '\n')
+
+
+def write_f2_file(name, listWords):#print word count to files
+    name+='.txt'
+    with open (name, 'w') as fo:
+        for word in listWords:
+            fo.write(word + '\n') #print values to file
+
+
+def get_unique_words(wordList): #get unique words
+
+    uniqueWords={}
+    for word in wordList:
+        if word not in uniqueWords: #if word is unique
+            uniqueWords[word]=1
+        else: #increment word count
+            uniqueWords[word]=uniqueWords[word]+1
+    return uniqueWords # return unique words with count
+
+def get_words(file):
+    no=[]
+    oneLine=None
+    with open(file) as fo: #read a file
+        x=fo.readlines()
+        for line in x: #remove newline
+            oneLine=line.strip()
+            no.extend(oneLine.split())
+    allWords=[]
+    for word in no: #removing punctuation
+        if word not in allWords: #if word not found
+            if '!' or ',' or '""' or '.' in word:
+                word=word.replace('!',"")
+                word=word.replace(',', "")
+                word=word.replace('.', "")
+                word=word.replace('!', "")
+                word=word.replace('""', "")
+            allWords.append(word)
+    return allWords  #returning list of all words
+
+if __name__ == '__main__': #call main function
+    main()
+
