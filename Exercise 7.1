@@ -1,0 +1,55 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Multiples of N
+Date: 11/01/2021
+
+Description:
+    A program that returns a list of numbers that are multiples of a specific number.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+import random as r
+
+
+def main():
+    #create original list
+    l = [19, 1599, -546, 10, 39, -58, 1, 85, 201, -91, 286, 799, 406]
+    multi = 13 #multiple
+
+    print('Original list of numbers:') #print original list
+    print('  ' + str(l))
+
+    #print list that are multiples
+    print('Numbers in the list that are multiples of ' + str(multi) + ':')
+    print('  ' + str(multiples_of(multi, l)))
+
+
+def multiples_of(multiple, l):  #find the multiples
+    s=[]
+    wide=len(l)
+    for a in range(0,wide):
+        if l[a] % multiple ==0 and l[a] !=1:
+            s.append(l[a])  #add multiples to list
+    return s
+
+
+if __name__ == '__main__': #call main function
+    main()
