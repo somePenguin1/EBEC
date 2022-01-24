@@ -1,0 +1,72 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - World Series
+Date: 11/21/2021
+
+Description:
+    A program that looks at a file with all of the world series winners, asks the user for input, gets the team that won
+    that year (if a game was played), and returns the number of times that team has won.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main():
+    userInput=int(input('Enter a year in the range 1903 -- 2020: ')) #get user input
+
+    (who, source)=load_winners_data()  #get dictionary
+    team=source.get(userInput) # get winning team
+    #print output
+    if (userInput>2020 or userInput<1903):
+        print(f'  Data for the year {userInput} is not included in this system.')
+    elif userInput == 1904 or userInput == 1994:
+        print(f"  The World Series wasn't played in the year {userInput}.")
+    else:
+        print(f'  The {team} won the World Series in {userInput}.')
+        print(f'  They have won the World Series {who.get(team)} times.')
+
+def load_winners_data(): #load winning data into dictionary
+    winnerYear={}
+    winnerNumTimes={}
+    with open('WorldSeriesWinners.txt') as fo:#read teams from file
+        x=fo.readlines()
+    for a in range(0, len(x)): #remove new lines
+        x[a]=x[a].replace('\n', '')
+
+    winnerYear[1903]=x[0]
+    for a in range(1, 90):  #print winners of all years
+        year=a+1904
+        winnerYear[year]=x[a] #add winning team for each year
+    winnerYear[1995]=x[90]
+    for a in range(91, 116):
+        year=a+1905
+        winnerYear[year]=x[a]
+    for a in range(0, len(winnerYear)):
+        num=0
+        team=x[a]
+        if team not in winnerNumTimes:
+            for year in winnerYear:
+                if winnerYear[year]==team:
+                    num+=1
+            winnerNumTimes[team]=num
+    return winnerNumTimes, winnerYear
+
+if __name__ == '__main__': #call main function
+    main()
+
