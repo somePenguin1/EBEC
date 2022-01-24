@@ -1,0 +1,85 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Avg Grade
+Date: 10/02/2021
+
+Description:
+    Program that finds the average grade from the grades that a user inputs and reports the letter grade for that.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+scoreList=[]
+
+def main(): #main function
+
+    numTime=0
+
+    while (numTime<5): #first loop to get 5 grades
+        x=get_valid_score()
+        numTime+=1
+
+    average=calc_average(scoreList)  #finding all the numbers needed
+    letterGrade=determine_grade(average)
+    average=format(average, '.2f')
+
+    #prints output
+    print('')
+    print('Results:')
+    print('  The average score is ' + str(average))
+    print('  The letter grade for ' + str(average) + ' is ' + str(letterGrade) + '.')
+
+def get_valid_score(): #method that gets input
+
+    gradeIn=float(input('Enter a score: '))
+
+    while(gradeIn >100.01 or gradeIn<-0.01):
+        print('  Invalid Input. Please try again.')
+        gradeIn=int(input('Enter a score: '))
+
+    scoreList.append(gradeIn)
+    someGrade=determine_grade(gradeIn)
+    if (gradeIn==100):
+        gradeIn=100.0
+    elif (gradeIn==0):
+        gradeIn=0.0
+    print('  The letter grade for ' + str(gradeIn) +  ' is ' + str(someGrade) + '.')
+    return gradeIn
+
+
+def calc_average(scoreList): #method that returns grade average
+    total=0
+    for a in range(0, len(scoreList)):
+        total+=scoreList[a]
+    return total/(len(scoreList))
+
+def determine_grade(num): #method that returns letter grade
+    if (num>=91):
+        return 'A'
+    elif (num>=82):
+        return 'B'
+    elif (num>=73):
+        return 'C'
+    elif (num>=64):
+        return 'D'
+    else:
+        return 'F'
+
+if __name__ == '__main__': # calling main function
+    main()
