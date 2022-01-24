@@ -1,0 +1,62 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - Rainfall
+Date: 9/27/2021
+
+Description:
+    Program that calculates the average rainfall over a number of years and months.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations withoutr
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+def main(): #main function
+
+    years=int(input("Enter the number of years: ")) #used for first num
+    monthsinyear=12
+    
+    if (years <1): #check invalid input
+        print('Invalid input.')
+    else:  #main loop statement
+        months=['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'] # list for months
+        total=0
+        for a in range(years): # first loop
+            print('  For year No. ' + str(a+1))
+            for b in range(monthsinyear): #second loop
+                rain=float(input('    Enter the rainfall for ' + str(months[b]) + ': '))
+                
+                while (rain < 0.0): #check for negative number
+                        print('    Invalid input, please try again.')
+                        rain=float(input('    Enter the rainfall for ' + str(months[b]) + ': '))
+
+                if (rain >=0.0):
+                    total+=rain
+   
+                #prepare numbers for printing
+                numMonths=monthsinyear*years
+                average=total/numMonths
+
+
+        #printing statements
+        print('There are ' + str(numMonths) + ' months.')
+        print('The total rainfall is ' + str(format(total, ".2f")) + ' inches.')
+        print('The monthly average rainfall is ' + str(format(average, ".2f")) + ' inches.')
+
+if __name__ == '__main__': # calling main function
+    main()
