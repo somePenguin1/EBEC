@@ -1,0 +1,52 @@
+"""
+Author: Aadi Jain, jain448@purdue.edu
+Assignment: m.n - File Stats
+Date: 11/07/2021
+
+Description:
+    A program that reads the contents of a text file and determines how many words and lines are in that file.
+
+Contributors:
+    Name, login@purdue.edu [repeat for each]
+
+My contributor(s) helped me:
+    [ ] understand the assignment expectations without
+        telling me how they will approach it.
+    [ ] understand different ways to think about a solution
+        without helping me plan my solution.
+    [ ] think through the meaning of a specific error or
+        bug present in my code without looking at my code.
+    Note that if you helped somebody else with their code, you
+    have to list that person as a contributor.
+
+Academic Integrity Statement:
+    I have not used source code obtained from any unauthorized
+    source, either modified or unmodified; nor have I provided
+    another student access to my code.  The project I am
+    submitting is my own original work.
+"""
+
+
+def main():
+    some = [] #array for lines
+
+    with open('frontiero_v_richardson.txt') as fo: #opening file
+        numLines = fo.readlines() #read lines
+        for line in numLines: #adds lines that are not a new line
+            if line != '\n':
+                some.append(line.replace('\n', ''))
+    numWords = 0
+    for line in some:
+        x = line.split() #divide line into words
+        for word in x: #add words from line
+            numWords += 1
+
+    #print all the output
+    print(f'Total number of words: {numWords}')
+    print(f'Total number of lines: {len(numLines)}')
+    average = round((numWords / len(numLines)), 1)
+    print(f'Average number of words per line: {average}')
+
+
+if __name__ == '__main__': #call main function
+    main()
